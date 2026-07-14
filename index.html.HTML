@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepplay-Conecta 🐻🎉</title>
+    <style>
+        :root {
+            --bg-party: linear-gradient(135deg, #1e0b36 0%, #3b0066 50%, #0d001a 100%);
+            --neon-pink: #ff007f;
+            --neon-cyan: #00f3ff;
+            --neon-violet: #9d00ff;
+            --neon-yellow: #ffeb3b;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-party);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Contenedor principal */
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            margin-top: auto;
+            margin-bottom: auto;
+            transition: all 0.3s ease;
+        }
+
+        /* Encabezado */
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-violet);
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Pantallas (Screens) */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Botones Estilo Fiesta */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-pink {
+            background: var(--neon-pink);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .btn-pink:hover {
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        .btn-cyan {
+            background: var(--neon-cyan);
+            color: #0d001a;
+        }
+        .btn-cyan:hover {
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .btn-violet {
+            background: var(--neon-violet);
+            color: white;
+        }
+        .btn-violet:hover {
+            box-shadow: 0 0 15px var(--neon-violet);
+        }
+
+        .btn-yellow {
+            background: var(--neon-yellow);
+            color: #0d001a;
+        }
+        .btn-yellow:hover {
+            box-shadow: 0 0 15px var(--neon-yellow);
+        }
+
+        /* Tarjeta de Pregunta / Penitencia */
+        .card-display {
+            padding: 30px 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.4;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Oso de Instrucciones */
+        .bear-helper {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px 15px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .bear-avatar {
+            font-size: 2.2rem;
+            animation: swing 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-10deg); }
+            100% { transform: rotate(10deg); }
+        }
+
+        .bear-text {
+            font-size: 0.85rem;
+            color: #e0d0ff;
+            line-height: 1.3;
+        }
+
+        /* Cuadrícula juego 1-50 */
+        .grid-50 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .grid-50::-webkit-scrollbar {
+            width: 6px;
+        }
+        .grid-50::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 10px;
+        }
+
+        .num-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 0;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .num-btn.used {
+            background: rgba(255, 255, 255, 0.02);
+            color: rgba(255,255,255,0.2);
+            border-color: transparent;
+            text-decoration: line-through;
+            pointer-events: none;
+        }
+
+        .num-btn:hover:not(.used) {
+            background: var(--neon-pink);
+            transform: scale(1.1);
+            box-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        /* Créditos */
+        footer {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Reglas */
+        .rules-content {
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .rules-content p {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>Deepplay-Conecta</h1>
+            <p>¡El juego definitivo de confianza y risas! ⚡</p>
+        </header>
+
+        <div id="screen-home" class="screen active">
+            <button class="btn btn-pink" onclick="navigate('screen-categories')">🎲 1. Elije Pregunta</button>
+            <button class="btn btn-cyan" onclick="triggerRandomPenalty()">🔥 2. Elije Penitencia</button>
+            <button class="btn btn-violet" onclick="navigate('screen-game-50')">🎯 3. Modo Desafío 1-50</button>
+            <button class="btn btn-yellow" onclick="navigate('screen-rules')">📜 4. Reglas del juego</button>
+
+            <div class="bear-helper">
+                <span class="bear-avatar">🐻</span>
+                <span class="bear-text" id="bear-home-text">"¡Hola! Soy el osito Deepplay. Elige una opción para empezar la diversión. ¡Sin vergüenza!"</span>
+            </div>
+        </div>
+
+        <div id="screen-rules" class="screen">
+            <h2 style="margin-bottom: 15px; color: var(--neon-yellow);">Reglas de la Fiesta 🎉</h2>
+            <div class="rules-content">
+                <p><strong>1. El Turno:</strong> Pasa el teléfono al jugador de la izquierda.</p>
+                <p><strong>2. Responder o Pagar:</strong> Presiona para obtener una pregunta. Si la respondes con total honestidad, ¡salvas tu turno!</p>
+                <p><strong>3. La Penitencia:</strong> Si te niegas a contestar o el grupo decide que mentiste, deberás presionar el botón de <strong>"Penitencia"</strong> y cumplirla sin chistar.</p>
+                <p><strong>4. Modo Desafío 1-50:</strong> Cada persona elige un número del tablero. Detrás de él hay una pregunta sorpresa. ¡En este modo NO está permitido pasar ni tomar penitencia! Obligatorio responder.</p>
+            </div>
+            <button class="btn btn-yellow" style="margin-top: 20px;" onclick="navigate('screen-home')">Volver al Inicio</button>
+        </div>
+
+        <div id="screen-categories" class="screen">
+            <h2 style="margin-bottom: 15px;">Selecciona Categoría</h2>
+            <button class="btn btn-pink" onclick="getQuestion('random')">✨ Sorpresa Aleatoria</button>
+            <button class="btn btn-violet" onclick="getQuestion('deep')">🌙 Profundas</button>
+            <button class="btn btn-pink" style="background: #e91e63;" onclick="getQuestion('love')">💕 Amor & Ex</button>
+            <button class="btn btn-cyan" onclick="getQuestion('capciosas')">😂 Capciosas</button>
+            <button class="btn btn-yellow" onclick="getQuestion('funny')">🍷 Para Reírse</button>
+            <button class="btn btn-pink" style="background: #ff5722;" onclick="getQuestion('hot')">🔥 Atrevidas</button>
+            <button class="btn btn-violet" style="background: #555;" onclick="navigate('screen-home')">🔙 Volver</button>
+        </div>
+
+        <div id="screen-question" class="screen">
+            <span id="question-category" class="category-tag">Categoría</span>
+            <div id="question-box" class="card-display" style="background: rgba(255, 0, 127, 0.2); border: 2px solid var(--neon-pink);">
+                Cargando pregunta...
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-cyan" style="flex: 1;" onclick="navigate('screen-home')">✅ Responder</button>
+                <button class="btn btn-pink" style="flex: 1;" onclick="triggerRandomPenalty()">💀 Penitencia</button>
+            </div>
+
+            <div class="bear-helper">
+                <span class="bear-avatar">🐻</span>
+                <span class="bear-text">"¡Uhh, esta pregunta quema! Si te da vergüenza responderla... ¡pide Penitencia!"</span>
+            </div>
+        </div>
+
+        <div id="screen-penalty" class="screen">
+            <span class="category-tag" style="background: var(--neon-cyan); color: #000;">🔥 Castigo de Fiesta</span>
+            <div id="penalty-box" class="card-display" style="background: rgba(0, 243, 255, 0.2); border: 2px solid var(--neon-cyan); color: #fff;">
+                Cargando penitencia...
+            </div>
+            
+            <button class="btn btn-yellow" onclick="navigate('screen-home')">🏠 Volver al Inicio</button>
+
+            <div class="bear-helper">
+                <span class="bear-avatar">🐻</span>
+                <span class="bear-text">"¡A cumplir! El grupo debe vigilar que la penitencia se haga de verdad."</span>
+            </div>
+        </div>
+
+        <div id="screen-game-50" class="screen">
+            <h2 style="margin-bottom: 5px; color: var(--neon-cyan);">Desafío 1 al 50</h2>
+            <p style="font-size: 0.85rem; margin-bottom: 15px; color: #aaa;">Elige un número. ¡Debes responder Sí o Sí!</p>
+            
+            <div class="grid-50" id="grid-container">
+                </div>
+
+            <button class="btn btn-pink" onclick="resetGrid()">🔄 Reiniciar Números</button>
+            <button class="btn btn-violet" onclick="navigate('screen-home')">🔙 Volver al Inicio</button>
+        </div>
+
+        <footer>
+            Derechos MDonosoM © 2026
+        </footer>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS DE PREGUNTAS ---
+        const database = {
+            deep: [
+                "¿Qué etapa de tu vida sientes que te cambió para siempre?",
+                "¿Qué cosa de ti crees que la gente no entiende bien?",
+                "¿Cuál ha sido el momento más difícil que lograste superar?",
+                "¿Qué consejo le darías a tu yo de 20 años?",
+                "¿Qué sueño tienes que todavía no has cumplido?",
+                "¿Qué persona marcó tu vida y por qué?",
+                "¿Qué aprendiste del amor a través de tus relaciones?",
+                "¿Qué parte de tu personalidad te gusta más?",
+                "¿Qué cosa te da miedo perder?",
+                "¿Qué te gustaría que tus amigas recuerden de ti?"
+            ],
+            love: [
+                "Si pudieras volver a ver a una ex pareja, ¿a quién sería y qué le preguntarías?",
+                "¿Cuál fue tu amor más intenso?",
+                "¿Te has quedado con ganas de decirle algo a alguien del pasado?",
+                "¿Cuál fue la mayor locura que hiciste por amor?",
+                "¿Cuál es la señal que te hace decir 'esta persona me gusta'?",
+                "¿Alguna vez te enamoraste de alguien que no convenía?",
+                "¿Qué red flag ignoraste alguna vez?",
+                "¿Crees que existe un 'amor de la vida' o varios?",
+                "¿Volverías con alguien del pasado si fuera diferente?",
+                "¿Cuál fue la mentira más grande que dijiste en una relación?"
+            ],
+            capciosas: [
+                "Si tu celular hablara, ¿qué secreto contaría de ti?",
+                "¿Qué cosa haces cuando nadie te ve?",
+                "¿Qué opinión tienes que casi nadie comparte?",
+                "¿Qué persona famosa invitarías a cenar y por qué?",
+                "¿Qué cosa jamás admitirías en una primera cita?",
+                "¿Qué hábito tuyo crees que tus amigas encuentran raro?",
+                "Si pudieras leer la mente de una persona, ¿de quién sería?",
+                "¿Qué pregunta no quieres que te hagan hoy?",
+                "¿Cuál es tu 'peor versión' cuando estás enojada?",
+                "¿Qué cosa pequeña te hace demasiado feliz?"
+            ],
+            funny: [
+                "¿Cuál ha sido tu vergüenza más grande?",
+                "¿Cuál es la historia más divertida que nadie sabe?",
+                "¿Qué apodo te han puesto y por qué?",
+                "¿Cuál fue tu peor look o moda?",
+                "¿Qué mentira inocente dijiste de niña?",
+                "¿Qué harías si mañana despiertas siendo millonaria?",
+                "¿Qué cosa comprarías aunque todos digan que es innecesaria?",
+                "¿Qué talento oculto tienes?",
+                "¿Qué personaje de película eres en tu vida?",
+                "¿Qué cosa te hace sentir joven otra vez?"
+            ],
+            hot: [
+                "¿Cuál fue tu mayor 'casi algo'?",
+                "¿Quién fue tu crush imposible?",
+                "¿Alguna vez te arrepentiste de no haber besado a alguien?",
+                "¿Qué secreto amoroso nunca contaste?",
+                "¿Cuál ha sido tu cita más rara?",
+                "¿Qué detalle romántico nunca olvidarás?",
+                "¿Qué harías si tu ex aparece diciendo 'cambié'?",
+                "¿Con qué persona del grupo saldrías si fueras del otro sexo? 😄",
+                "¿Cuál es tu debilidad cuando alguien te gusta?",
+                "¿Qué verdad sobre ti sorprendería a todos?"
+            ]
+        };
+
+        // --- PENITENCIAS INVENTADAS ---
+        const penalties = [
+            "💃 Baila una canción de reggaetón de los 2000s durante 30 segundos como si estuvieras en el antro.",
+            "🎤 Canta el coro de tu canción favorita usando voz de ópera o con tono súper dramático.",
+            "🤳 Sube una selfie haciendo una cara graciosa a tus historias de Instagram o ponla de estado de WhatsApp por 15 minutos.",
+            "🦁 Imita a un animal salvaje enfurecido hasta que alguien adivine cuál eres.",
+            "😂 Cuéntale al grupo tu chiste más fome, pero ríete a carcajadas falsas después de terminar.",
+            "🤪 Deja que la persona a tu derecha te dibuje un pequeño tatuaje temporal en el brazo usando un lápiz.",
+            "🤫 Llama a un contacto de tu agenda y dile que ganaste un concurso de comer empanadas, luego cuelga sin dar explicaciones.",
+            "🍷 Haz un brindis sumamente exagerado y telenovelesco agradeciendo a tus amigos por existir.",
+            "🎭 Actúa durante todo el próximo turno como si fueras la reina de Inglaterra/un rey muy refinado.",
+            "📱 Muestra al grupo la última foto que guardaste en la galería de tu celular, ¡sin censura!",
+            "🥶 Mantén un hielo en la mano hasta que se derrita por completo o que pase tu siguiente turno."
+        ];
+
+        // Frases aleatorias para el oso en la página principal
+        const bearQuotes = [
+            "\"¡Hola! Soy el osito Deepplay. Elige una opción para empezar la diversión. ¡Sin vergüenza!\"",
+            "\"¡Epa! Recuerda que lo que pasa en Deepplay, se queda en Deepplay. 😉\"",
+            "\"¿Quieres salseo o risas? ¡Tú decides el rumbo de la noche!\"",
+            "\"¡Si mientes en las respuestas, te crecerá la nariz como a Pinocho! Avisado estás. 🐻\""
+        ];
+
+        // --- NAVEGACIÓN ---
+        function navigate(screenId) {
+            playBeep(250, 0.1); // Sonido suave
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+
+            // Cambiar frase del oso en la pantalla de inicio si se regresa allí
+            if (screenId === 'screen-home') {
+                const randomQuote = bearQuotes[Math.floor(Math.random() * bearQuotes.length)];
+                document.getElementById('bear-home-text').innerText = randomQuote;
+            }
+        }
+
+        // --- LÓGICA DE PREGUNTAS ---
+        function getQuestion(category) {
+            let selectedCategoryList = [];
+            let categoryName = "";
+            let colorTheme = "var(--neon-pink)";
+
+            if (category === 'random') {
+                const keys = Object.keys(database);
+                const randomKey = keys[Math.floor(Math.random() * keys.length)];
+                selectedCategoryList = database[randomKey];
+                categoryName = getCategoryName(randomKey);
+                colorTheme = getCategoryColor(randomKey);
+            } else {
+                selectedCategoryList = database[category];
+                categoryName = getCategoryName(category);
+                colorTheme = getCategoryColor(category);
+            }
+
+            const randomIndex = Math.floor(Math.random() * selectedCategoryList.length);
+            const question = selectedCategoryList[randomIndex];
+
+            // Renderizar pantalla de preguntas
+            const qBox = document.getElementById('question-box');
+            const qCat = document.getElementById('question-category');
+            
+            qCat.innerText = categoryName;
+            qCat.style.background = colorTheme;
+            if(categoryName === "Capciosas" || categoryName === "Para Reírse") {
+                qCat.style.color = "#000";
+            } else {
+                qCat.style.color = "#fff";
+            }
+
+            qBox.innerText = question;
+            qBox.style.borderColor = colorTheme;
+            qBox.style.background = `${colorTheme}25`; // Fondo translúcido
+
+            navigate('screen-question');
+        }
+
+        function getCategoryName(key) {
+            const names = {
+                deep: "🌙 Profundas",
+                love: "💕 Amor, ex & relaciones",
+                capciosas: "😂 Capciosas",
+                funny: "🍷 Para Reírse",
+                hot: "🔥 Atrevidas"
+            };
+            return names[key] || "Sorpresa";
+        }
+
+        function getCategoryColor(key) {
+            const colors = {
+                deep: "var(--neon-violet)",
+                love: "#e91e63",
+                capciosas: "var(--neon-cyan)",
+                funny: "var(--neon-yellow)",
+                hot: "#ff5722"
+            };
+            return colors[key] || "var(--neon-pink)";
+        }
+
+        // --- LÓGICA DE PENITENCIAS ---
+        function triggerRandomPenalty() {
+            const randomIndex = Math.floor(Math.random() * penalties.length);
+            const penalty = penalties[randomIndex];
+
+            const pBox = document.getElementById('penalty-box');
+            pBox.innerText = penalty;
+
+            navigate('screen-penalty');
+        }
+
+        // --- LÓGICA JUEGO 1-50 ---
+        function initGrid() {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+            for (let i = 1; i <= 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'num-btn';
+                btn.innerText = i;
+                btn.id = `num-${i}`;
+                btn.onclick = () => selectNumber(i);
+                container.appendChild(btn);
+            }
+        }
+
+        function selectNumber(number) {
+            const btn = document.getElementById(`num-${number}`);
+            if (btn && !btn.classList.contains('used')) {
+                btn.classList.add('used');
+                playBeep(400, 0.1);
+                
+                // Unir todas las preguntas posibles para sacar una al azar
+                const allQuestions = [...database.deep, ...database.love, ...database.capciosas, ...database.funny, ...database.hot];
+                const randomQuestion = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+
+                // Presentar como pregunta obligatoria
+                const qBox = document.getElementById('question-box');
+                const qCat = document.getElementById('question-category');
+                
+                qCat.innerText = `🎯 Desafío Número ${number}`;
+                qCat.style.background = "var(--neon-yellow)";
+                qCat.style.color = "#000";
+
+                qBox.innerText = `Elegiste el número ${number}. Tu reto obligatorio es:\n\n"${randomQuestion}"`;
+                qBox.style.borderColor = "var(--neon-yellow)";
+                qBox.style.background = "rgba(255, 235, 59, 0.15)";
+
+                // Ocultar temporalmente el botón "Penitencia" porque en el desafío es obligatorio responder
+                const penBtn = document.querySelector('#screen-question .btn-pink');
+                penBtn.style.display = 'none';
+
+                // Modificar el botón "Responder" para regresar a la cuadrícula 1-50 en vez del home
+                const respBtn = document.querySelector('#screen-question .btn-cyan');
+                respBtn.onclick = () => {
+                    penBtn.style.display = 'block'; // restaurar
+                    respBtn.onclick = () => navigate('screen-home'); // restaurar
+                    navigate('screen-game-50');
+                };
+
+                navigate('screen-question');
+            }
+        }
+
+        function resetGrid() {
+            initGrid();
+            playBeep(600, 0.15);
+        }
+
+        // --- EFECTO DE SONIDO SINTÉTICO (Sin dependencias externas) ---
+        function playBeep(frequency, duration) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.type = 'sine';
+                oscillator.frequency.value = frequency;
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); // Volumen muy bajo para no molestar
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch(e) {
+                // El navegador puede bloquear el audio si no ha habido interacción previa
+            }
+        }
+
+        // Inicializar el tablero al cargar
+        window.onload = () => {
+            initGrid();
+        };
+    </script>
+</body>
+</html>
