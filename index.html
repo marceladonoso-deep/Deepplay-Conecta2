@@ -552,9 +552,59 @@
                 btn.classList.add('used');
                 playBeep(400, 0.1);
                 
-                // Unir todas las preguntas posibles para sacar una al azar
-                const allQuestions = [...database.deep, ...database.love, ...database.capciosas, ...database.funny, ...database.hot];
-                const randomQuestion = allQuestions[Math.floor(Math.random() * allQuestions.length)];
+               const desafios50 = [
+            "¿Quién del grupo crees que sobreviviría menos tiempo en una isla desierta y por qué?",
+            "Si pudieras cambiar de vida con alguien de esta sala por 24 horas, ¿con quién sería?",
+            "Di tres cosas que te encantan de la persona que tienes a tu izquierda.",
+            "¿Cuál ha sido el peor regalo que has recibido en tu vida y qué hiciste con él?",
+            "Si ganaras la lotería mañana, ¿cuál sería el primer capricho innecesario que te comprarías?",
+            "¿Qué es lo más vergonzoso que has buscado en Google en la última semana?",
+            "Confiésale al grupo: ¿Cuál es tu placer culposo musical? (Esa canción que te da vergüenza admitir que te encanta).",
+            "¿Qué superpoder elegirías: ser invisible o leer la mente? ¿Por qué?",
+            "¿Cuál ha sido tu peor experiencia en una aplicación de citas (Tinder/Bumble)?",
+            "Si fueras un fantasma, ¿a quién del grupo elegirías para asustar todas las noches?",
+            "¿Cuál es el mito o mentira más absurda que creías cuando eras niño?",
+            "Si pudieras eliminar una red social del planeta para siempre, ¿cuál elegirías?",
+            "¿Cuál ha sido la peor comida que has fingido que te gustaba por pura educación?",
+            "¿Qué es lo primero en lo que te fijas cuando conoces a alguien físicamente?",
+            "Si tuvieras que elegir una canción para cantar en un karaoke ahora mismo para salvar tu vida, ¿cuál sería?",
+            "¿Cuál ha sido el trabajo o la tarea más extraña que has tenido que hacer por dinero?",
+            "¿Qué es lo más inmaduro que sigues haciendo a tu edad?",
+            "Si hicieran una película de tu vida, ¿qué actor o actriz te interpretaría?",
+            "¿Cuál es la manía o TOC más extraño que tienes cuando estás a solas en tu casa?",
+            "¿Quién fue tu primer amor platónico famoso en la infancia o adolescencia?",
+            "Si pudieras viajar en el tiempo, ¿irías al futuro o al pasado? ¿A qué año exactamente?",
+            "¿Qué es lo más atrevido que has hecho en un lugar público?",
+            "Si fueras un sabor de helado, ¿cuál serías y por qué descripción te definiría?",
+            "¿Cuál es la conversación de WhatsApp más extraña o divertida que tienes archivada?",
+            "¿Qué palabra o frase usas demasiado todos los días y ya te da rabia escucharla?",
+            "Si tuvieras que vestirte con un disfraz de fiesta toda la semana, ¿cuál elegirías?",
+            "¿Qué es lo que más te hace reír de la persona que está sentada frente a ti?",
+            "Si pudieras aprender a hablar un idioma a la perfección en un segundo, ¿cuál sería?",
+            "¿Cuál ha sido la mentira piadosa más grande que le has dicho a tus padres?",
+            "Si pudieras ser un animal por un día, ¿cuál serías y qué harías?",
+            "¿Qué es lo más loco que has comprado estando bajo los efectos de la fiesta o el alcohol?",
+            "¿Cuál es tu teoría conspirativa favorita que secretamente crees que es real?",
+            "Si tuvieras que borrar un año entero de tu pasado de tu memoria, ¿cuál elegirías?",
+            "¿Qué es lo que más te molesta que haga la gente en una primera cita?",
+            "¿Quién del grupo crees que gasta más dinero en cosas que no necesita?",
+            "Si pudieras invitar a tres personas de la historia humana a cenar, ¿quiénes serían?",
+            "¿Cuál es el peor corte de cabello o look que has tenido en fotos antiguas?",
+            "¿Qué secreto tienes que solo una persona en esta habitación conoce?",
+            "Si tuvieras que elegir un Reality Show para entrar, ¿en cuál encajarías mejor?",
+            "¿Cuál es tu talento inútil más impresionante (mover las orejas, doblar la lengua, etc.)?",
+            "¿Qué cosa te da un miedo irracional pero a los demás les parece normal?",
+            "Si pudieras robarle una cualidad o talento a alguien de esta sala, ¿cuál sería y a quién?",
+            "¿Cuál es el mensaje de texto enviado por error del que más te arrepientes?",
+            "Si te dieran un pasaje gratis solo de ida a cualquier parte del mundo ahora mismo, ¿a dónde irías?",
+            "¿Cuál es tu peor defecto cuando estás de mal humor o cansado?",
+            "¿Qué opinas realmente de las relaciones abiertas o el poliamor?",
+            "Si pudieras cambiar tu nombre de pila por cualquier otro, ¿cómo te gustaría llamarte?",
+            "¿Qué es lo más gracioso o extraño que te ha pasado mientras viajabas en transporte público?",
+            "¿Cuál es la lección de vida más dura que has tenido que aprender a la mala?",
+            "Si tuvieras que elegir a una persona de este grupo para ir a prisión contigo como cómplice, ¿a quién elegirías?"
+        ];
+        const randomQuestion = desafios50[number - 1];
 
                 // Presentar como pregunta obligatoria
                 const qBox = document.getElementById('question-box');
